@@ -1,28 +1,27 @@
 //this is the way how we create new component
 
-import React,{ Component } from 'react';
+import React from 'react';
 import { Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle } from 'reactstrap';
 
-
-class Menu extends Component {
-    constructor(props){
-        super(props);
- 
+//now this is looking like a functional component 
+    function RenderMenuItem({dish,onClick}){
+        return(
+            <Card onClick={ ()=> onClick(dish.id)}>
+                <CardImg width="100%" src ={dish.image} alt={dish.name}/>
+                <CardImgOverlay>
+                        <CardTitle>{dish.name}</CardTitle>
+                    </CardImgOverlay>
+            </Card>
+        )
     }
-   
-
-    render(){
         
-         
-        const menu = this.props.dishes.map((dish)=> {
+    //another way of creating functional component
+        
+     const Menu = (props) => {
+        const menu = props.dishes.map((dish)=> {
             return(
                 <div key={dish.id} className="col-12 col-md-5 mt-5">
-                    <Card onClick={ ()=> this.props.onClick(dish.id)}>
-                        <CardImg width="100%" src ={dish.image} alt={dish.name}/>
-                        <CardImgOverlay>
-                                <CardTitle>{dish.name}</CardTitle>
-                            </CardImgOverlay>
-                    </Card>
+                  <RenderMenuItem dish={dish} onClick={props.onClick}/>
                 </div>
             );
         });
@@ -35,9 +34,9 @@ class Menu extends Component {
                 </div>
             </div>
         );
-    }
-}
 
+     }    
+       
 export default Menu;
 
 // render method is required to return element which will be the component of UI.
