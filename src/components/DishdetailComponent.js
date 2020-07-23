@@ -111,7 +111,7 @@ class CommentForm extends Component {
     }
 
     
-    function RenderComments({ comments }) {
+    function RenderComments({ comments,addComment,dishId }) {
         if (comments.length === 0) {
             return (<Fragment></Fragment>)
         }
@@ -133,7 +133,7 @@ class CommentForm extends Component {
                 <h4>Comments</h4>
                 <ul className='list-unstyled'>
                     {mapComments}
-                    <CommentForm />
+                    <CommentForm dishId={dishId} addComment={addComment} />
                 </ul>
     
             </div>
@@ -157,7 +157,9 @@ class CommentForm extends Component {
                     </div>
                     <div className="row">
                    <RenderDish dish = {props.dish}/>
-                    <RenderComments comments = {props.comments}/>
+                    <RenderComments comments = {props.comments} 
+                    addComment =  {props.addComment} 
+                    dishId = {props.dish.id} />
                     
                     </div>
                     
